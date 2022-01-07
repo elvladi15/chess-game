@@ -19,7 +19,7 @@ export function Board() {
     gameResult,
     gameResultDisplay,
   } = useGame();
-  const { whiteCaptures, blackCaptures } = currentBoardState;
+  const { whiteCaptures, blackCaptures, isWhiteTurn } = currentBoardState;
   const dispatch = useGameUpdate();
 
   const rows = [8, 7, 6, 5, 4, 3, 2, 1];
@@ -122,6 +122,27 @@ export function Board() {
     if (!gameStarted) return <GameStarting />;
     if (gameResultDisplay) return <GameFinished />;
   }
+  function renderTurnCircle() {
+    if (!gameStarted) return null;
+
+    function isCirclePositionUp() {
+      if (isBoardFlipped) {
+        return isWhiteTurn;
+      } else {
+        return !isWhiteTurn;
+      }
+    }
+    const turnCircleStyle = {
+      position: "absolute",
+      backgroundColor: isWhiteTurn ? "#fff" : "#000",
+      width: "1.5rem",
+      height: "1.5rem",
+      right: "-2rem",
+      borderRadius: "50%",
+      [isCirclePositionUp() ? "top" : "bottom"]: 0,
+    };
+    return <div className="turn-circle" style={turnCircleStyle}></div>;
+  }
   return (
     <div className="board-wrapper">
       <div className="container">
@@ -131,7 +152,7 @@ export function Board() {
           {createSquares(COLUMNS, rows, isBoardFlipped)}
 
           {gameStateRendering()}
-
+          {renderTurnCircle()}
           {
             <div className="rows" style={rowsStyle}>
               {rows.map(row => (
