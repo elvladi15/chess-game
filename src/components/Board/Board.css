@@ -1,0 +1,83 @@
+:root {
+  --board-side: 80vw;
+  --max-board-side: 450px;
+}
+.board-wrapper {
+  display: flex;
+}
+.board-wrapper > .container {
+  margin: 0 auto;
+}
+.board {
+  display: grid;
+  grid-template-rows: repeat(8, 1fr);
+  grid-template-columns: repeat(8, 1fr);
+  width: min(var(--board-side), var(--max-board-side));
+  height: min(var(--board-side), var(--max-board-side));
+  position: relative;
+  margin: 1.5rem 0 3rem;
+}
+.player {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  font-size: min(3.3vw, 1.5rem);
+}
+.player__picture {
+  width: min(10vw, 5rem);
+  border-radius: 2px;
+}
+
+.player__detail {
+  margin-left: 1rem;
+}
+.captured-pieces {
+  display: flex;
+  align-items: flex-end;
+  height: 27px;
+}
+.captured-piece-group + .captured-piece-group {
+  margin-left: 0.4rem;
+}
+.captured-pieces img {
+  height: min(5vw, 20px);
+}
+img + img {
+  margin-left: -0.6rem;
+}
+
+.resign-btn,
+.offer-draw-btn {
+  color: #fff;
+  padding: 0.3em 0.6em;
+  margin-left: 1rem;
+  font-size: inherit;
+  font-weight: bold;
+}
+.resign-btn {
+  background-color: #e73e33;
+}
+.offer-draw-btn {
+  background-color: #57bbdb;
+}
+.rotate-icon {
+  fill: white;
+}
+
+.rows,
+.columns {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  position: absolute;
+  font-size: 1.2rem;
+  color: #fff;
+}
+.rows {
+  height: min(var(--board-side), var(--max-board-side));
+  left: -1.5rem;
+}
+.columns {
+  width: min(var(--board-side), var(--max-board-side));
+  bottom: -2rem;
+}

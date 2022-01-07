@@ -1,0 +1,109 @@
+.game {
+  width: 90%;
+  max-width: 900px;
+  padding: 2rem 0;
+  margin: 0 auto 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.game__details {
+  background-color: #272522;
+  width: min(100%, 450px);
+  border-radius: 10px;
+  margin: 2rem 0 0 0;
+  padding: 2rem 0;
+  color: #fff;
+}
+.game__details > .container {
+  margin: 0 auto;
+  width: 80%;
+}
+.game__details__section + .game__details__section {
+  margin-top: 2rem;
+}
+.game__details h2 {
+  margin-bottom: 0.6em;
+  font-size: 1.7rem;
+}
+.moves {
+  font-size: 1.6rem;
+  font-weight: bold;
+  overflow-y: scroll;
+  height: 150px;
+  background-color: #21201d;
+  padding: 1rem;
+  text-align: start;
+}
+.moves__rows {
+  width: 2rem;
+}
+.moves__columns {
+  width: 5rem;
+}
+.moves__columns button {
+  padding: 0.2em 0.6em;
+  color: #fff;
+  font-size: inherit;
+  font-weight: inherit;
+}
+.unselected-state {
+  background-color: transparent;
+}
+.selected-state {
+  background-color: #555451;
+}
+
+.square-color-btns button,
+.piece-design-btns button,
+.board-state-change-btns button {
+  padding: 0.5em 0.8em;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.6rem;
+  margin-right: 1em;
+}
+.game-finished-btns button {
+  padding: 0.5em 0.5em;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.6rem;
+}
+.piece-design-btns button,
+.board-state-change-btns button,
+.game-finished-btns button {
+  background-color: #32312f;
+}
+.square-color-btns button {
+  font-size: 1.3rem;
+}
+.game-results-btn {
+  margin-right: 1em;
+}
+.play-again-btn {
+  background-color: #7fa650 !important;
+}
+.pattern-1 {
+  background-color: #769656;
+}
+.pattern-2 {
+  background-color: #b58863;
+}
+.pattern-3 {
+  background-color: #4b7399;
+  margin: 1em 0 0 0;
+}
+
+@media (min-width: 800px) {
+  .game {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: stretch;
+    padding: 1rem 0;
+  }
+  .game__details {
+    margin: 0 0 0 3rem;
+    width: 40%;
+  }
+}
