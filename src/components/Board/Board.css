@@ -4,6 +4,7 @@
 }
 .board-wrapper {
   display: flex;
+  width: 90%;
 }
 .board-wrapper > .container {
   margin: 0 auto;
@@ -18,18 +19,50 @@
   margin: 1.5rem 0 3rem;
 }
 .player {
-  display: flex;
-  align-items: center;
+  display: grid;
+  grid-template-columns: min(10vw, 6rem) 1fr;
   color: #fff;
-  font-size: min(3.3vw, 1.5rem);
+}
+.img-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 .player__picture {
-  width: min(10vw, 5rem);
+  width: 100%;
   border-radius: 2px;
 }
 
 .player__detail {
   margin-left: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+.player-username {
+  font-size: min(5vw, 2rem);
+  margin-bottom: 0.5em;
+}
+.player-btns {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: min(3vw, 1.5rem);
+}
+.player-btns button {
+  color: #fff;
+  padding: 0.3em 0.6em;
+  font-weight: bold;
+  margin: 0 1rem 1rem 0;
+  font-size: inherit;
+}
+.resign-btn {
+  background-color: #e73e33;
+}
+.offer-draw-btn {
+  background-color: #57bbdb;
+}
+.repetition-draw-btn {
+  background-color: #f8a90b;
 }
 .captured-pieces {
   display: flex;
@@ -46,20 +79,6 @@ img + img {
   margin-left: -0.6rem;
 }
 
-.resign-btn,
-.offer-draw-btn {
-  color: #fff;
-  padding: 0.3em 0.6em;
-  margin-left: 1rem;
-  font-size: inherit;
-  font-weight: bold;
-}
-.resign-btn {
-  background-color: #e73e33;
-}
-.offer-draw-btn {
-  background-color: #57bbdb;
-}
 .rotate-icon {
   fill: white;
 }

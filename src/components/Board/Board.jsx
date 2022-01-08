@@ -34,7 +34,7 @@ export function Board() {
     fill: "#fff",
     position: "absolute",
     top: "-2.5rem",
-    right: 0,
+    right: "-2rem",
     cursor: "pointer",
     transform: "scale(1.5)",
   };
@@ -54,7 +54,7 @@ export function Board() {
     if (!gameStarted) return;
     dispatch({ type: ACTIONS.FLIP_BOARD });
   }
-  function renderPlayer(isWhite) {
+  function renderPlayerInfo(isWhite) {
     const player = isWhite ? whitePlayer : blackPlayer;
     const capturedPieces = isWhite ? blackCaptures : whiteCaptures;
 
@@ -78,15 +78,23 @@ export function Board() {
     }
     return (
       <div className="player">
-        <img src={player?.picture} alt="" className="player__picture" />
+        <div className="img-container">
+          <img src={player.picture} alt="" className="player__picture" />
+        </div>
+
         <div className="player__detail">
-          <label>{player?.username}</label>
-          <button className="resign-btn" onClick={resign}>
-            Resign
-          </button>
-          <button className="offer-draw-btn" onClick={offerDraw}>
-            Offer draw
-          </button>
+          <label className="player-username">{player.username}</label>
+          <div className="player-btns">
+            <button className="resign-btn" onClick={resign}>
+              Resign
+            </button>
+            <button className="offer-draw-btn" onClick={offerDraw}>
+              Offer draw
+            </button>
+            <button className="repetition-draw-btn" onClick={offerDraw}>
+              Claim 50 move draw
+            </button>
+          </div>
           <div className="captured-pieces">
             <div className="captured-piece-group">
               {[...Array(capturedPieces.pawn)].map((_, index) => (
@@ -135,8 +143,8 @@ export function Board() {
     const turnCircleStyle = {
       position: "absolute",
       backgroundColor: isWhiteTurn ? "#fff" : "#000",
-      width: "1.5rem",
-      height: "1.5rem",
+      width: "min(5vw,1.5rem)",
+      height: "min(5vw,1.5rem)",
       right: "-2rem",
       borderRadius: "50%",
       [isCirclePositionUp() ? "top" : "bottom"]: 0,
@@ -146,7 +154,7 @@ export function Board() {
   return (
     <div className="board-wrapper">
       <div className="container">
-        {gameStarted ? renderPlayer(isBoardFlipped) : null}
+        {gameStarted ? renderPlayerInfo(isBoardFlipped) : null}
 
         <div className="board">
           {createSquares(COLUMNS, rows, isBoardFlipped)}
@@ -172,7 +180,7 @@ export function Board() {
           {<AutorenewIcon style={rotateIconStyle} onClick={() => flipBoard()} />}
         </div>
 
-        {gameStarted ? renderPlayer(!isBoardFlipped) : null}
+        {gameStarted ? renderPlayerInfo(!isBoardFlipped) : null}
       </div>
     </div>
   );
