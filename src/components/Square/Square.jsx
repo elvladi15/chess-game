@@ -115,6 +115,7 @@ export default function Square({ position }) {
     }
     if (canSelectPiece()) return dispatch({ type: ACTIONS.SELECT_PIECE, payload: { piece } });
     if (canDeselectPiece()) return dispatch({ type: ACTIONS.DESELECT_PIECE });
+
     if (canAssignPromotion()) {
       return dispatch({
         type: ACTIONS.ASSIGN_PROMOTION,
@@ -122,13 +123,17 @@ export default function Square({ position }) {
       });
     }
     if (canMovePiece()) {
+      let canResetStreakCount = false;
       if (piece != null) {
+        canResetStreakCount = true;
         dispatch({ type: ACTIONS.REMOVE_PIECE, payload: { position } });
       }
       dispatch({
         type: ACTIONS.MOVE_PIECE,
         payload: { piece: selectedPiece, position, registerMove: true },
       });
+
+      if (selectedPiece.type === PIECE_TYPES.PAWN) canResetStreakCount = true;
 
       //en passant capture
       function canCaptureEnPassant() {
@@ -200,6 +205,11 @@ export default function Square({ position }) {
         });
       }
 
+      if (canResetStreakCount) {
+        dispatch({ type: ACTIONS.RESET_STREAK_COUNT_WITHOUT_PAWN_MOVE_OR_CAPTURE });
+      } else {
+        dispatch({ type: ACTIONS.INCREMENT_STREAK_COUNT_WITHOUT_PAWN_MOVE_OR_CAPTURE });
+      }
       dispatch({ type: ACTIONS.CHANGE_TURN });
       return;
     }

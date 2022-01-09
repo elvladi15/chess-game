@@ -15,8 +15,12 @@ export const ACTIONS = {
   CHANGE_PIECE_DESIGN: "change-piece-design",
   RESIGN: "resign",
   DRAW_BY_AGREEMENT: "draw-by-agreement",
+  DRAW_BY_FIFTY_MOVE_RULE: "draw-by-fifty-move-rule",
   CLOSE_RESULT_DISPLAY: "close-result-display",
   OPEN_RESULT_DISPLAY: "open-result-display",
+  RESET_STREAK_COUNT_WITHOUT_PAWN_MOVE_OR_CAPTURE: "reset-streak-without-pawn-move-or-capture",
+  INCREMENT_STREAK_COUNT_WITHOUT_PAWN_MOVE_OR_CAPTURE:
+    "increment-streak-without-pawn-move-or-capture",
 };
 export const PIECE_TYPES = {
   PAWN: "pawn",
@@ -55,4 +59,5 @@ export const GAME_RESULTS = {
   STALEMATE: "stalemate",
   REPETITION: "repetition",
   INSUFFICIENT_MATERIAL: "insufficient material",
+  FIFTY_MOVE_RULE: "fifty move rule",
 };

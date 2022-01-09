@@ -90,6 +90,7 @@ export function gameReducer(state, { type, payload }) {
         return { ...piece };
       }),
       selectedPiece: null,
+      streakCountWithoutPawnMoveOrCapture: 0,
     };
     delete initialCurrentBoardState.move;
 
@@ -116,12 +117,11 @@ export function gameReducer(state, { type, payload }) {
   }
   if (type === ACTIONS.PLAY_AGAIN) {
     return {
+      ...state,
       boardStates: [],
       currentBoardState: {
         pieces: [],
       },
-      squareColor: state.squareColor,
-      pieceDesign: state.pieceDesign,
       whiteUsername: state.whitePlayer.username,
       blackUsername: state.blackPlayer.username,
       gameStarted: false,
@@ -231,6 +231,7 @@ export function gameReducer(state, { type, payload }) {
       kingChecked
     );
 
+    const boardStatesUntilCurrentState = state.boardStates.slice(0, state.currentBoardStateId + 1);
     function getGameResult() {
       function isDrawByInsufficientMaterial() {
         //only 2 kings
@@ -284,15 +285,12 @@ export function gameReducer(state, { type, payload }) {
         return true;
       }
       function isDrawByRepetition() {
-        if (state.boardStates.length < 8) return false;
+        if (boardStatesUntilCurrentState.length <= 7) return false;
         if (
-          getPositionRepeatCount(
-            newPiecesWithAvailableSquares,
-            state.boardStates.slice(0, state.currentBoardStateId + 1)
-          ) < 2
+          getPositionRepeatCount(newPiecesWithAvailableSquares, boardStatesUntilCurrentState) === 3
         )
-          return false;
-        return true;
+          return true;
+        return false;
       }
       if (isDrawByInsufficientMaterial())
         return {
@@ -341,10 +339,7 @@ export function gameReducer(state, { type, payload }) {
     };
     delete newBoardState.selectedPiece;
 
-    const newBoardStates = [
-      ...state.boardStates.slice(0, state.currentBoardStateId + 1),
-      newBoardState,
-    ];
+    const newBoardStates = [...boardStatesUntilCurrentState, newBoardState];
     return {
       ...state,
       boardStates: newBoardStates,
@@ -408,6 +403,13 @@ export function gameReducer(state, { type, payload }) {
       gameResultDisplay: true,
     };
   }
+  if (type === ACTIONS.DRAW_BY_FIFTY_MOVE_RULE) {
+    return {
+      ...state,
+      gameResult: { motive: GAME_RESULTS.FIFTY_MOVE_RULE },
+      gameResultDisplay: true,
+    };
+  }
   if (type === ACTIONS.CLOSE_RESULT_DISPLAY) {
     return {
       ...state,
@@ -418,6 +420,25 @@ export function gameReducer(state, { type, payload }) {
     return {
       ...state,
       gameResultDisplay: true,
+    };
+  }
+  if (type === ACTIONS.RESET_STREAK_COUNT_WITHOUT_PAWN_MOVE_OR_CAPTURE) {
+    return {
+      ...state,
+      currentBoardState: {
+        ...state.currentBoardState,
+        streakCountWithoutPawnMoveOrCapture: 0,
+      },
+    };
+  }
+  if (type === ACTIONS.INCREMENT_STREAK_COUNT_WITHOUT_PAWN_MOVE_OR_CAPTURE) {
+    return {
+      ...state,
+      currentBoardState: {
+        ...state.currentBoardState,
+        streakCountWithoutPawnMoveOrCapture:
+          state.currentBoardState.streakCountWithoutPawnMoveOrCapture + 1,
+      },
     };
   }
 }

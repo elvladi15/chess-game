@@ -19,7 +19,8 @@ export function Board() {
     gameResult,
     gameResultDisplay,
   } = useGame();
-  const { whiteCaptures, blackCaptures, isWhiteTurn } = currentBoardState;
+  const { whiteCaptures, blackCaptures, isWhiteTurn, streakCountWithoutPawnMoveOrCapture } =
+    currentBoardState;
   const dispatch = useGameUpdate();
 
   const rows = [8, 7, 6, 5, 4, 3, 2, 1];
@@ -61,7 +62,7 @@ export function Board() {
     function resign() {
       if (gameResult != null) return;
       const confirm = window.confirm(
-        `${player.username}, Are you sure you want to resign the game?`
+        `${player.username}, are you sure you want to resign the game?`
       );
       if (confirm) {
         dispatch({ type: ACTIONS.RESIGN, payload: { isWhiteWinner: !isWhite } });
@@ -74,6 +75,15 @@ export function Board() {
       );
       if (confirm) {
         dispatch({ type: ACTIONS.DRAW_BY_AGREEMENT });
+      }
+    }
+    function claimDrawByFiftyMoveRule() {
+      if (gameResult != null) return;
+      const confirm = window.confirm(
+        `${player.username}, are you sure you want to claim draw by 50 move rule?`
+      );
+      if (confirm) {
+        dispatch({ type: ACTIONS.DRAW_BY_FIFTY_MOVE_RULE });
       }
     }
     return (
@@ -91,9 +101,11 @@ export function Board() {
             <button className="offer-draw-btn" onClick={offerDraw}>
               Offer draw
             </button>
-            <button className="repetition-draw-btn" onClick={offerDraw}>
-              Claim 50 move draw
-            </button>
+            {streakCountWithoutPawnMoveOrCapture >= 100 && isWhite === isWhiteTurn ? (
+              <button className="repetition-draw-btn" onClick={claimDrawByFiftyMoveRule}>
+                Claim 50 move draw
+              </button>
+            ) : null}
           </div>
           <div className="captured-pieces">
             <div className="captured-piece-group">

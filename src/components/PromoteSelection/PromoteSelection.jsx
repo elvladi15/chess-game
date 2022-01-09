@@ -18,6 +18,7 @@ export default function PromoteSelection() {
     dispatch({ type: ACTIONS.DESELECT_PIECE });
   }
   function selectPromotePiece(type) {
+    dispatch({ type: ACTIONS.RESET_STREAK_COUNT_WITHOUT_PAWN_MOVE_OR_CAPTURE });
     if (canCapture) {
       dispatch({ type: ACTIONS.REMOVE_PIECE, payload: { position } });
     }
