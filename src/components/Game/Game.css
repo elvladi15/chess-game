@@ -64,26 +64,30 @@
   font-size: 1.6rem;
   margin-right: 1em;
 }
+
+.piece-design-btns button,
+.board-state-change-btns button,
+.game-finished-btns button {
+  background-color: #32312f;
+}
+
 .game-finished-btns button {
   padding: 0.5em 0.5em;
   color: #fff;
   font-weight: bold;
   font-size: 1.6rem;
 }
-.piece-design-btns button,
-.board-state-change-btns button,
-.game-finished-btns button {
-  background-color: #32312f;
-}
-.square-color-btns button {
-  font-size: 1.3rem;
-}
 .game-results-btn {
   margin-right: 1em;
 }
 .play-again-btn {
+  margin-top: 2rem;
   background-color: #7fa650 !important;
 }
+.square-color-btns button {
+  font-size: 1.3rem;
+}
+
 .pattern-1 {
   background-color: #769656;
 }

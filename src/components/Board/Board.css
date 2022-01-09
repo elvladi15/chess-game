@@ -100,3 +100,8 @@ img + img {
   width: min(var(--board-side), var(--max-board-side));
   bottom: -2rem;
 }
+@media (min-width: 800px) {
+  .board-wrapper {
+    width: auto;
+  }
+}

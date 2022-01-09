@@ -32,7 +32,7 @@ export default function GameFinished() {
       </button>
       <h1>{getFinalResult()}</h1>
       <h2>{`by ${gameResult.motive}`}</h2>
-      <button className="play-again-btn" onClick={playAgain}>
+      <button className="play-again-result-btn" onClick={playAgain}>
         Play again!
       </button>
     </div>
