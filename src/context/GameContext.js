@@ -13,7 +13,7 @@ export function useGameUpdate() {
 }
 
 export default function GameContextProvider({ children }) {
-  const INITIAL_STATE = {
+  const INITIAL_STATE = JSON.parse(localStorage.getItem("state")) ?? {
     boardStates: [],
     currentBoardState: {
       pieces: [],

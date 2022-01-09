@@ -94,7 +94,7 @@ export function gameReducer(state, { type, payload }) {
     };
     delete initialCurrentBoardState.move;
 
-    return {
+    const newState = {
       boardStates: [initialBoardState],
       currentBoardStateId: 0,
       currentBoardState: initialCurrentBoardState,
@@ -114,9 +114,11 @@ export function gameReducer(state, { type, payload }) {
         picture: require("../assets/default-player.png").default,
       },
     };
+    localStorage.setItem("state", JSON.stringify(newState));
+    return newState;
   }
   if (type === ACTIONS.PLAY_AGAIN) {
-    return {
+    const newState = {
       ...state,
       boardStates: [],
       currentBoardState: {
@@ -128,6 +130,8 @@ export function gameReducer(state, { type, payload }) {
       gameResult: null,
       gameResultDisplay: false,
     };
+    localStorage.setItem("state", JSON.stringify(newState));
+    return newState;
   }
   if (type === ACTIONS.SELECT_PIECE) {
     return {
@@ -190,10 +194,12 @@ export function gameReducer(state, { type, payload }) {
     };
   }
   if (type === ACTIONS.FLIP_BOARD) {
-    return {
+    const newState = {
       ...state,
       isBoardFlipped: !state.isBoardFlipped,
     };
+    localStorage.setItem("state", JSON.stringify(newState));
+    return newState;
   }
   if (type === ACTIONS.PROMOTE_PAWN) {
     const newPieces = state.currentBoardState.pieces.map(piece => {
@@ -340,7 +346,7 @@ export function gameReducer(state, { type, payload }) {
     delete newBoardState.selectedPiece;
 
     const newBoardStates = [...boardStatesUntilCurrentState, newBoardState];
-    return {
+    const newState = {
       ...state,
       boardStates: newBoardStates,
       currentBoardState: newCurrentBoardState,
@@ -348,6 +354,8 @@ export function gameReducer(state, { type, payload }) {
       gameResult,
       gameResultDisplay: gameResult != null,
     };
+    localStorage.setItem("state", JSON.stringify(newState));
+    return newState;
   }
   if (type === ACTIONS.ASSIGN_PROMOTION) {
     return {
@@ -362,10 +370,12 @@ export function gameReducer(state, { type, payload }) {
     };
   }
   if (type === ACTIONS.CHANGE_SQUARE_COLOR) {
-    return {
+    const newState = {
       ...state,
       squareColor: payload.squareColor,
     };
+    localStorage.setItem("state", JSON.stringify(newState));
+    return newState;
   }
   if (type === ACTIONS.JUMP_TO_BOARD_STATE) {
     const newCurrentBoardState = {
@@ -381,13 +391,15 @@ export function gameReducer(state, { type, payload }) {
     };
   }
   if (type === ACTIONS.CHANGE_PIECE_DESIGN) {
-    return {
+    const newState = {
       ...state,
       pieceDesign: payload.pieceDesign,
     };
+    localStorage.setItem("state", JSON.stringify(newState));
+    return newState;
   }
   if (type === ACTIONS.RESIGN) {
-    return {
+    const newState = {
       ...state,
       gameResult: {
         motive: GAME_RESULTS.RESIGNATION,
@@ -395,20 +407,26 @@ export function gameReducer(state, { type, payload }) {
       },
       gameResultDisplay: true,
     };
+    localStorage.setItem("state", JSON.stringify(newState));
+    return newState;
   }
   if (type === ACTIONS.DRAW_BY_AGREEMENT) {
-    return {
+    const newState = {
       ...state,
       gameResult: { motive: GAME_RESULTS.AGREEMENT },
       gameResultDisplay: true,
     };
+    localStorage.setItem("state", JSON.stringify(newState));
+    return newState;
   }
   if (type === ACTIONS.DRAW_BY_FIFTY_MOVE_RULE) {
-    return {
+    const newState = {
       ...state,
       gameResult: { motive: GAME_RESULTS.FIFTY_MOVE_RULE },
       gameResultDisplay: true,
     };
+    localStorage.setItem("state", JSON.stringify(newState));
+    return newState;
   }
   if (type === ACTIONS.CLOSE_RESULT_DISPLAY) {
     return {
