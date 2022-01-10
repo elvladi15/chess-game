@@ -1,7 +1,7 @@
 # chess-game
 
 Local multiplayer chess game made with ReactJS without using chess libraries.
-GitHub pages link: https://elvladi15.github.io/chess-game/
+GitHub Pages link: https://elvladi15.github.io/chess-game/
 
 ## Player functionalities:
 
