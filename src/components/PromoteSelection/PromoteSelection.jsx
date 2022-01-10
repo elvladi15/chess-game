@@ -24,7 +24,7 @@ export default function PromoteSelection() {
     }
     dispatch({
       type: ACTIONS.MOVE_PIECE,
-      payload: { piece: selectedPiece, position: position },
+      payload: { piece: selectedPiece, position: position, registerMove: true },
     });
     dispatch({
       type: ACTIONS.PROMOTE_PAWN,

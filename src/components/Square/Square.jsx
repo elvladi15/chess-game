@@ -211,6 +211,7 @@ export default function Square({ position }) {
         dispatch({ type: ACTIONS.INCREMENT_STREAK_COUNT_WITHOUT_PAWN_MOVE_OR_CAPTURE });
       }
       dispatch({ type: ACTIONS.CHANGE_TURN });
+
       return;
     }
   }

@@ -6,6 +6,11 @@ import { getMove } from "../chess_utils/getMove";
 import { getPositionRepeatCount } from "../chess_utils/getPositionRepeatCount";
 import { createPiece } from "../chess_utils/createPiece";
 
+//sound effects
+import normalMoveAudio from "../chess_audio/normal_move.mp3";
+import captureAudio from "../chess_audio/capture.mp3";
+import checkAudio from "../chess_audio/check.mp3";
+
 export function gameReducer(state, { type, payload }) {
   if (type === ACTIONS.START_GAME) {
     const startingPosition = [
@@ -346,6 +351,17 @@ export function gameReducer(state, { type, payload }) {
     delete newBoardState.selectedPiece;
 
     const newBoardStates = [...boardStatesUntilCurrentState, newBoardState];
+
+    function getAudio() {
+      if (kingChecked) return checkAudio;
+      if (
+        newCurrentBoardState.pieces.length ===
+        state.boardStates[state.currentBoardStateId].pieces.length - 1
+      )
+        return captureAudio;
+      return normalMoveAudio;
+    }
+    new Audio(getAudio()).play();
     const newState = {
       ...state,
       boardStates: newBoardStates,

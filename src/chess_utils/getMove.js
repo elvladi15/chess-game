@@ -33,6 +33,7 @@ export function getMove(boardStateBeforeMove, boardStateAfterMove, gameResult) {
 
   function findNotationMatch(type) {
     const matches = {
+      thereIsMatch: false,
       columnUnmatch: false,
       rowUnmatch: false,
     };
@@ -49,19 +50,22 @@ export function getMove(boardStateBeforeMove, boardStateAfterMove, gameResult) {
 
     for (const piece of differentFromMovingPiece) {
       if (!piece.availableSquares.includes(pieceAfterMove.position)) continue;
-
-      const column = piece.position[0];
+      matches.thereIsMatch = true;
+      const [column, row] = piece.position;
       if (column === pieceBeforeMoveColumn) {
         matches.rowUnmatch = true;
-      } else {
-        /*
-        column will be default to unmatch notations
-        when there is no match in column.
-        */
+      } else if (row === pieceBeforeMoveRow) {
         matches.columnUnmatch = true;
       }
     }
+    if (!matches.thereIsMatch) return "";
     if (matches.columnUnmatch) unmatcher += pieceBeforeMoveColumn;
+    /*
+    if there is match, but there is neither match in 
+    row nor column, the column will be used by default
+    */
+    if (!matches.columnUnmatch && !matches.rowUnmatch) unmatcher += pieceBeforeMoveColumn;
+
     if (matches.rowUnmatch) unmatcher += pieceBeforeMoveRow;
     return unmatcher;
   }
