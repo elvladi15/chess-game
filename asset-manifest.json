@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/chess-game/static/css/main.0b367e90.chunk.css",
+    "main.js": "/chess-game/static/js/main.f72fa4e9.chunk.js",
+    "main.js.map": "/chess-game/static/js/main.f72fa4e9.chunk.js.map",
+    "runtime-main.js": "/chess-game/static/js/runtime-main.589a9ed0.js",
+    "runtime-main.js.map": "/chess-game/static/js/runtime-main.589a9ed0.js.map",
+    "static/js/2.e2900716.chunk.js": "/chess-game/static/js/2.e2900716.chunk.js",
+    "static/js/2.e2900716.chunk.js.map": "/chess-game/static/js/2.e2900716.chunk.js.map",
+    "index.html": "/chess-game/index.html",
+    "static/css/main.0b367e90.chunk.css.map": "/chess-game/static/css/main.0b367e90.chunk.css.map",
+    "static/js/2.e2900716.chunk.js.LICENSE.txt": "/chess-game/static/js/2.e2900716.chunk.js.LICENSE.txt",
+    "static/media/capture.25244aa0.mp3": "/chess-game/static/media/capture.25244aa0.mp3",
+    "static/media/check.cbc11b52.mp3": "/chess-game/static/media/check.cbc11b52.mp3",
+    "static/media/default-player.png": "/chess-game/static/media/default-player.4aa827c3.png",
+    "static/media/normal_move.06c4776f.mp3": "/chess-game/static/media/normal_move.06c4776f.mp3",
+    "static/media/queen_white.png": "/chess-game/static/media/queen_white.c106f144.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.589a9ed0.js",
+    "static/js/2.e2900716.chunk.js",
+    "static/css/main.0b367e90.chunk.css",
+    "static/js/main.f72fa4e9.chunk.js"
+  ]
+}
